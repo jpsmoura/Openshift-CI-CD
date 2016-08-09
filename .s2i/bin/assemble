@@ -1,2 +1,3 @@
 #!/bin/sh
+echo "Joao Test: " $APP_LOCATION
 wget $APP_LOCATION -O app.jar
