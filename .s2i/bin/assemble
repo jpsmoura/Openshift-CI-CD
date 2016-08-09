@@ -6,8 +6,10 @@ echo "Starting Download"
 curl -H "Accept: application/zip" $APP_LOCATION -o ~/${BUNDLE_NAME}
 
 cd ~
-echo "Bundle Downloaded " ls -l | grep "^d"
-
+echo "Bundle Downloaded "
+ls -l | grep "^d"
+#Check If needed
+mkdir ~/hawt-app
 # Unzip and remove the root directory
 echo "Unzipping Tar"
 tar -xvzf ${BUNDLE_NAME} -C ~/hawt-app --strip 1
