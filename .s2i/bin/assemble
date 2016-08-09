@@ -10,8 +10,11 @@ echo "Bundle Downloaded "
 ls -l | grep "^d"
 #Check If needed
 # Unzip and remove the root directory
+
+echo "Joao: " ${DEPLOYMENTS_DIR}
+
 echo "Unzipping Tar"
-tar -xvzf ${BUNDLE_NAME} -C ${DEPLOYMENTS_DIR} --strip 1
+tar -xvzf ${BUNDLE_NAME} -C /deployments --strip 1
 echo "Unzip Complete"
 cd ~
 echo "Unzipped Files"
