@@ -14,7 +14,7 @@ ls -l | grep "^d"
 echo "Joao: " ${DEPLOYMENTS_DIR}
 
 echo "Unzipping Tar"
-tar -xvzf ${BUNDLE_NAME} -C /deployments --strip 1
+tar -xvzf ${BUNDLE_NAME} -C /deployments/ --strip 1
 echo "Unzip Complete"
 cd ~
 echo "Unzipped Files"
