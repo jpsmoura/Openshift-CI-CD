@@ -176,6 +176,23 @@ function get_from_maven() {
 
   cd ${old_dir}
 }
+function test_pull() {
+  # Where artifacts are created during build
+  local build_dir=$1
+
+  # Where to put the artifacts
+  local app_dir=$2
+
+  echo "Joao build_dir: " ${build_dir}
+
+  #Fetch Binary from Nexus instead of builing locally with Maven
+  curl -H "Accept: application/zip" $APP_LOCATION -o ${build_dir}/${BUNDLE_NAME}
+  # Unzip and remove the root directory
+  tar -xvzf ${BUNDLE_NAME} -C ${build_dir}/hawt-app --strip 1
+
+
+}
+
 
 # =========================================================================
 # Main
@@ -183,17 +200,6 @@ function get_from_maven() {
 echo "=================================================================="
 echo "Starting S2I Java Build ....."
 build_dir=$(get_output_dir)
-check_error "Cannot get output dir: $build_dir" $?
-if [ -f "${S2I_SOURCE_DIR}/pom.xml" ]; then
-  echo "Maven build detected"
-  # If a pom.xml is present use maven
-  setup_maven
-  get_from_maven ${build_dir} ${DEPLOYMENTS_DIR}
-else
-  binary_dir="${ARTIFACT_DIR:-${S2I_SOURCE_DIR}/deployments}"
-  # Assuming that the source already contains compiled artefacts
-  echo "Copying binaries from ${binary_dir} to ${S2I_ARTIFACTS_DIR} ..."
-  copy_dir ${binary_dir} ${DEPLOYMENTS_DIR}
-fi
-
+setup_maven
+test_pull ${build_dir} ${DEPLOYMENTS_DIR}
 echo "... done"
