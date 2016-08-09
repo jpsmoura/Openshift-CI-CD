@@ -9,10 +9,9 @@ cd ~
 echo "Bundle Downloaded "
 ls -l | grep "^d"
 #Check If needed
-mkdir ~/hawt-app
 # Unzip and remove the root directory
 echo "Unzipping Tar"
-tar -xvzf ${BUNDLE_NAME} -C ~/hawt-app --strip 1
+tar -xvzf ${BUNDLE_NAME} -C ${DEPLOYMENTS_DIR} --strip 1
 echo "Unzip Complete"
 cd ~
 echo "Unzipped Files"
