@@ -184,12 +184,16 @@ function test_pull() {
   local app_dir=$2
 
   echo "Joao build_dir: " ${build_dir}
+  echo "Joao app_dir: " ${app_dir}
 
   #Fetch Binary from Nexus instead of builing locally with Maven
   curl -H "Accept: application/zip" $APP_LOCATION -o ${build_dir}/${BUNDLE_NAME}
+  echo $PWD
+
   # Unzip and remove the root directory
   tar -xvzf ${BUNDLE_NAME} -C ${build_dir}/hawt-app --strip 1
-
+  cd "Joao Files" ${build_dir}
+  echo ls -l | grep "^d"
 
 }
 
@@ -200,6 +204,5 @@ function test_pull() {
 echo "=================================================================="
 echo "Starting S2I Java Build ....."
 build_dir=$(get_output_dir)
-setup_maven
 test_pull ${build_dir} ${DEPLOYMENTS_DIR}
 echo "... done"
