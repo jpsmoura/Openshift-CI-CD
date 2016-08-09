@@ -13,5 +13,7 @@ mkdir ~/hawt-app
 # Unzip and remove the root directory
 echo "Unzipping Tar"
 tar -xvzf ${BUNDLE_NAME} -C ~/hawt-app --strip 1
+echo "Unzip Complete"
 cd ~
-echo "Unzipped Files  " ls -l | grep "^d"
+echo "Unzipped Files"
+ls -l | grep "^d"
