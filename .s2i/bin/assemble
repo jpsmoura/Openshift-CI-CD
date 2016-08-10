@@ -121,9 +121,15 @@ function get_from_nexus() {
   echo "Download with CURL completed"
   echo "Unzipping Tar from ~/${BUNDLE_NAME} to ${DEPLOYMENTS_DIR}"
   tar -xvzf ~/${BUNDLE_NAME} -C ${DEPLOYMENTS_DIR} --strip 1
-  echo "Deplyment Directory"
+  echo "Deployment Directory"
   cd ${DEPLOYMENTS_DIR}
   echo "$(ls)"
+
+  echo "NEXUS FULL PATH URL"
+  echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}${ARTIFACT_VERSION}${BUNDLE_NAME}"
+  echo "Variable Test: ${BUNDLE_FULL_PATH}"
+
+
 }
 
 # =========================================================================
