@@ -121,7 +121,6 @@ function get_from_nexus() {
   curl -H "Accept: application/zip" $BUNDLE_FULL_PATH -o ~/$BUNDLE_NAME
   if [ 0 -eq $? ]; then
     echo "Download complete"
-  fi;
   else
     echo "Failed to Download Release Bundle"
     exit 1
