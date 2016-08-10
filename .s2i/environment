@@ -1,2 +1,6 @@
 APP_LOCATION=https://dl.dropboxusercontent.com/u/2426419/ose-mq-client-demo-2.0-SNAPSHOT-app.tar.gz
 BUNDLE_NAME=ose-mq-client-demo-2.0-SNAPSHOT-app.tar.gz
+S2I_DESTINATION=${S2I_DESTINATION:-/tmp}
+S2I_SOURCE_DIR="${S2I_DESTINATION}/src"
+S2I_ARTIFACTS_DIR="${S2I_DESTINATION}/artifacts"
+DEPLOYMENTS_DIR="/deployments"
