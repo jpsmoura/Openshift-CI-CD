@@ -119,10 +119,15 @@ function get_from_nexus() {
 
   echo "Starting CURL Download from $BUNDLE_FULL_PATH"
   curl -H "Accept: application/zip" $BUNDLE_FULL_PATH -o ~/$BUNDLE_NAME
-  echo "Download complete"
+  if [ 0 -eq $? ]; then
+    echo "Download complete"
+  fi;
+  else
+    echo "Failed to Download Release Bundle"
+    exit 1
+  fi;
   echo "Unzipping Tar from ~/$BUNDLE_NAME to ${DEPLOYMENTS_DIR}"
   tar -xvzf ~/$BUNDLE_NAME -C ${DEPLOYMENTS_DIR} --strip 1
-
 
 }
 
