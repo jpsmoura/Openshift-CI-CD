@@ -4,7 +4,7 @@ S2I_ARTIFACTS_DIR="${S2I_DESTINATION}/artifacts"
 DEPLOYMENTS_DIR=/deployments
 #########Environment Variables to be used by the CI/CD Process#############
 REPOSITORY_NAME=nexus/content/repositories/releases
-NEXUS_URL=http://localhost:8081/
+NEXUS_URL=http://172.17.11.179:8081/
 GROUP_ID=/com/jpmoura/
 ARTIFACT_ID=app
 ARTIFACT_VERSION=1.0
