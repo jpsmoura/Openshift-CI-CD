@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Global S2I variable setup
-#source `dirname "$0"`/s2i-setup
+source `dirname "$0"`./environment
 
 # Maven arguments setting up the environment
 maven_env_args="-Dmaven.repo.local=${S2I_ARTIFACTS_DIR}/m2"
@@ -129,7 +129,7 @@ function get_from_nexus() {
   echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}/${ARTIFACT_VERSION}${BUNDLE_NAME}"
 
   echo "Ugly Solution"
-  echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}/${ARTIFACT_VERSION}${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_ID}.tar.gz"
+  echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}/${ARTIFACT_VERSION}/${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_ID}.tar.gz"
 
 
   echo "Variable Test: ${BUNDLE_FULL_PATH}"
