@@ -126,9 +126,14 @@ function get_from_nexus() {
   echo "$(ls)"
 
   echo "NEXUS FULL PATH URL"
-  echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}${ARTIFACT_VERSION}${BUNDLE_NAME}"
+  echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}/${ARTIFACT_VERSION}${BUNDLE_NAME}"
+
+  echo "Ugly Solution"
+  echo "${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}/${ARTIFACT_VERSION}${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_ID}.tar.gz"
+
+
   echo "Variable Test: ${BUNDLE_FULL_PATH}"
-  echo "Variable Full: " ${BUNDLE_FULL_PATH}
+  echo "Variable Full: " ${!BUNDLE_FULL_PATH}
 
 
 }
