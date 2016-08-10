@@ -1,15 +1,10 @@
+S2I_DESTINATION=${S2I_DESTINATION:-/tmp}
+S2I_SOURCE_DIR="${S2I_DESTINATION}/src"
+S2I_ARTIFACTS_DIR="${S2I_DESTINATION}/artifacts"
+DEPLOYMENTS_DIR=/deployments
+#########Environment Variables to be used by the CI/CD Process#############
 REPOSITORY_NAME=nexus/content/repositories/releases
 NEXUS_URL=http://localhost:8081/
 GROUP_ID=/com/jpmoura/
 ARTIFACT_ID=app
 ARTIFACT_VERSION=1.0
-BUNDLE_NAME="${ARTIFACT_ID}-${ARTIFACT_VERSION}-${ARTIFACT_ID}.tar.gz"
-#BUNDLE_FULL_PATH="${NEXUS_URL}${REPOSITORY_NAME}${GROUP_ID}${ARTIFACT_ID}${ARTIFACT_VERSION}${BUNDLE_NAME}"
-
-#APP_LOCATION=https://dl.dropboxusercontent.com/u/2426419/app-1.0-SNAPSHOT-app.tar.gz
-#BUNDLE_NAME=app-1.0-SNAPSHOT-app.tar.gz
-S2I_DESTINATION=${S2I_DESTINATION:-/tmp}
-S2I_SOURCE_DIR="${S2I_DESTINATION}/src"
-S2I_ARTIFACTS_DIR="${S2I_DESTINATION}/artifacts"
-DEPLOYMENTS_DIR=/deployments
-http://localhost:8081/nexus/content/repositories/releases/com/jpmoura/app/1.0/app-1.0-app.tar.gz
