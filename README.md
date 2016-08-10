@@ -5,13 +5,8 @@ oc start-build <buildConfig> -n <namespace> --env var=value <br />
 If no parameters are given the default values are populated from the environment file.
 
 ## Example
-oc start-build s2i-quickstart-cdi-camel -n default --env \ <br />
-REPOSITORY_NAME=nexus/content/repositories/releases \ <br />
-NEXUS_URL=http://localhost:8081/ \ <br />
-GROUP_ID=/com/jpmoura/ \ <br />
-ARTIFACT_ID=app \ <br />
-ARTIFACT_VERSION=1.0
+oc start-build s2i-quickstart-cdi-camel -n default --env NEXUS_URL=http://localhost:8081/ --env GROUP_ID=/com/jpmoura/ --env ARTIFACT_ID=app --env ARTIFACT_VERSION=1.0
 
 # Run the example from FIS Vagrant Box
 git clone https://github.com/jpsmoura/Openshift-CI-CD.git <br />
-oc create configmap ci-cd-config --from-file=./config-map.properties
+oc create -n default configmap ci-cd-config --from-file=./config-map.properties
