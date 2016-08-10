@@ -131,8 +131,8 @@ function get_from_nexus() {
 
 
   echo "Variable Test: ${BUNDLE_FULL_PATH}"
-  echo "Variable Full: " ${!BUNDLE_FULL_PATH}
-  echo "Exclamation
+  echo "Variable Full: " ${BUNDLE_FULL_PATH}
+  echo "Exclamation"
   echo ${!BUNDLE_FULL_PATH}
   echo "Eval"
   eval echo \${$BUNDLE_FULL_PATH}
