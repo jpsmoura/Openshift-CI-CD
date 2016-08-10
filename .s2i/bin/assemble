@@ -1,10 +1,8 @@
 #!/bin/sh
 
-# Global S2I variable setup
-source environment
 
 # Maven arguments setting up the environment
-maven_env_args="-Dmaven.repo.local=${S2I_ARTIFACTS_DIR}/m2"
+#maven_env_args="-Dmaven.repo.local=${S2I_ARTIFACTS_DIR}/m2"
 
 # =========================================================================
 # Helper functions:
@@ -134,7 +132,10 @@ function get_from_nexus() {
 
   echo "Variable Test: ${BUNDLE_FULL_PATH}"
   echo "Variable Full: " ${!BUNDLE_FULL_PATH}
-
+  echo "Exclamation
+  echo ${!BUNDLE_FULL_PATH}
+  echo "Eval"
+  eval echo \${$BUNDLE_FULL_PATH}
 
 }
 
