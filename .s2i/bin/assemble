@@ -120,6 +120,8 @@ function get_from_nexus() {
   curl -H "Accept: application/zip" $APP_LOCATION -o ~/${BUNDLE_NAME}
   echo "Download with CURL completed"
   echo "Unzipping Tar from ~/${BUNDLE_NAME} to ${DEPLOYMENTS_DIR}"
+  echo "Creating Deployents folder"
+  mkdir ${DEPLOYMENTS_DIR}
   tar -xvzf ~/${BUNDLE_NAME} -C ${DEPLOYMENTS_DIR} --strip 1
   echo "Deplyment Directory"
   cd ${DEPLOYMENTS_DIR}
