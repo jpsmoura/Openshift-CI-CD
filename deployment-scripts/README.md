@@ -3,9 +3,9 @@
 2) Deployment of the application to OpenShift
 
 ## Run the deployment script
-git clone https://github.com/jpsmoura/Openshift-CI-CD.git <br /> &&
-cd deployment-scripts/ <br /> &&
-chmod +x deploy.sh <br /> &&
+git clone https://github.com/jpsmoura/Openshift-CI-CD.git &&
+cd deployment-scripts/ &&
+chmod +x deploy.sh &&
 ./deploy.sh
 
 ###Script parameters
