@@ -4,15 +4,15 @@
 
 ## Run the deployment script
 git clone https://github.com/jpsmoura/Openshift-CI-CD.git &&
-cd deployment-scripts/ &&
+cd Openshift-CI-CD/deployment-scripts/ &&
 chmod +x deploy.sh &&
-./deploy.sh
+./deploy.sh -u admin -p admin -e DEV -o 10.1.2.2:8443 -n test4 -s my-secret -a s2i-quickstart-cdi-camel
 
 ###Script parameters
-USER_NAME=admin<br/>
-USER_PASSWD=admin<br/>
-OSE_SERVER=10.1.2.2:8443<br/>
-CERT_PATH=<br/>
-APP_NAME=s2i-quickstart-cdi-camel<br/>
-APP_NAMESPACE=test4<br/>
-SECRET_NAME=my-secret<br/>
+-u or --user
+-p or --password
+-e or --environment  --> DEV,TEST,PROD
+-o or --osehost
+-n or --namespace
+-s or --secret
+-a or --appname
