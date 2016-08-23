@@ -1,5 +1,5 @@
 # Deploy the application
-1) Overwrites the application secret. All the properties under ose-secrets are added to the secret.<br />
+1) Overwrites the application secret. All the properties under ose-secrets are added to the secret.<br/>
 2) Deployment of the application to OpenShift
 
 ## Run the deployment script
@@ -9,10 +9,10 @@ chmod +x deploy.sh &&
 ./deploy.sh -u admin -p admin -e DEV -o 10.1.2.2:8443 -n test4 -s my-secret -a s2i-quickstart-cdi-camel
 
 ###Script parameters
--u or --user
--p or --password
--e or --environment  --> DEV,TEST,PROD
--o or --osehost
--n or --namespace
--s or --secret
--a or --appname
+-u or --user<br/>
+-p or --password<br/>
+-e or --environment  --> DEV,TEST,PROD<br/>
+-o or --osehost<br/>
+-n or --namespace<br/>
+-s or --secret<br/>
+-a or --appname<br/>

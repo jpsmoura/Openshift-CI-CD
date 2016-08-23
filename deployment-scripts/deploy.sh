@@ -41,7 +41,7 @@ esac
 shift # past argument or value
 done
 
-oc login -u$USER_NAME -p$USER_PASSWD --server=$OSE_SERVER #--certificate-authority=$CERT_PATH
+oc login -u$USER_NAME -p$USER_PASSWD --server=$OSE_SERVER
 
 oc project $APP_NAMESPACE
 

@@ -1,10 +1,52 @@
 #!/usr/bin/env bash
-$APP_NAMESPACE
-$APP_NAME
-$NEXUS_URL
-$MVN_GROUP_ID
-$MVN_ARTIFACT_ID
-$MVN_VERSION
+
+while [[ $# -gt 1 ]]
+do
+key="$1"
+
+case $key in
+    -u|--user)
+    USER_NAME="$2"
+    shift # past argument
+    ;;
+    -p|--password)
+    USER_PASSWD="$2"
+    shift # past argument
+    ;;
+    -o|--osehost)
+    OSE_SERVER="$2"
+    shift # past argument
+    ;;
+    -n|--namespace)
+    APP_NAMESPACE="$2"
+    shift # past argument
+    ;;
+    -a|--appname)
+    APP_NAME="$2"
+    shift # past argument
+    ;;
+    -u|--nexusURL)
+    NEXUS_URL="$2"
+    shift # past argument
+    ;;
+    -g|--groupID)
+    MVN_GROUP_ID="$2"
+    shift # past argument
+    ;;
+    -i|--artifactID)
+    MVN_ARTIFACT_ID="$2"
+    shift # past argument
+    ;;
+    -v|--version)
+    MVN_VERSION="$2"
+    shift # past argument
+    ;;
+    *)
+    echo -e $RED"Illegal parameters: -$OPTARG"$WHITE
+    echo -e $RED"Example: ./build.sh -u admin -p admin -o 10.1.2.2:8443 -n test4 -a s2i-quickstart-cdi-camel -u http://localhost:8081/ -g /com/jpmoura/ -i app -v 1.0"$WHITE
+    ;;
+
+oc login -u$USER_NAME -p$USER_PASSWD --server=$OSE_SERVER
 
 BUILD_ID=`oc start-build $APP_NAME -n $APP_NAMESPACE --env NEXUS_URL=$NEXUS_URL --env GROUP_ID=$MVN_GROUP_ID --env ARTIFACT_ID=$MVN_ARTIFACT_ID --env ARTIFACT_VERSION=$MVN_VERSION`
 
