@@ -1,6 +1,6 @@
-# Deploy the application
+# Deployment of the application
 1) Overwrites the application secret. All the properties under ose-secrets are added to the secret.<br/>
-2) Deployment of the application to OpenShift
+2) Application os deployed to OpenShift
 
 ## Run the deployment script
 git clone https://github.com/jpsmoura/Openshift-CI-CD.git &&
@@ -11,8 +11,11 @@ chmod +x deploy.sh &&
 ###Script parameters
 -u or --user<br/>
 -p or --password<br/>
--e or --environment  --> DEV,TEST,PROD<br/>
+-e or --environment --> DEV,TEST,PROD<br/>
 -o or --osehost<br/>
 -n or --namespace<br/>
 -s or --secret<br/>
 -a or --appname<br/>
+
+## Environment Customisation
+Simply copy one of the environments folders and rename it to the name of your new environment
