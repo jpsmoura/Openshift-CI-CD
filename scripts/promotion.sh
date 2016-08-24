@@ -44,6 +44,9 @@ shift # past argument or value
 done
 
 openshift_login
+# Update secrets on target environment
+oc project $ENV
+update_secrets
+# Tags will always be from the dev namespace
 oc project dev
-#update_secrets
 oc tag $APP_NAME:latest $APP_NAME:$ENV
