@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. ./helper_functions.sh
+
 while [[ $# -gt 1 ]]
 do
 key="$1"
@@ -49,7 +51,7 @@ case $key in
     shift # past argument or value
     done
 
-oc login -u$USER_NAME -p$USER_PASSWD --server=$OSE_SERVER
+openshift_login
 
 BUILD_ID=`oc start-build $APP_NAME -n $APP_NAMESPACE --env NEXUS_URL=$NEXUS_URL --env GROUP_ID=$MVN_GROUP_ID --env ARTIFACT_ID=$MVN_ARTIFACT_ID --env ARTIFACT_VERSION=$MVN_VERSION`
 

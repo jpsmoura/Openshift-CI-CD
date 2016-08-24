@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+. ./helper_functions.sh
+
 while [[ $# -gt 1 ]]
 do
 key="$1"
@@ -41,21 +43,11 @@ esac
 shift # past argument or value
 done
 
-oc login -u$USER_NAME -p$USER_PASSWD --server=$OSE_SERVER
+openshift_login
 
 oc project $APP_NAMESPACE
 
-oc get secrets | grep $SECRET_NAME
-
-if ! [ $? -eq 0 ]; then
-  echo -e "Creating new secret: $SECRET_NAME"
-  oc secrets new $SECRET_NAME ../environments/$ENV/ose-secrets
-else
-  echo -e "Deleting existing secret: $SECRET_NAME"
-  oc delete secret $SECRET_NAME
-  echo -e "Creating new secret: $SECRET_NAME"
-  oc secrets new $SECRET_NAME ../environments/$ENV/ose-secrets
-fi
+update_secrets
 
 # App Deployment
 echo -e "Deploying Application: $APP_NAME"
