@@ -135,6 +135,6 @@ function get_from_nexus() {
 # Main
 
 echo "=================================================================="
-echo "Starting S2I Java Build ....."
+echo "Starting Custom S2I Java Build ....."
 get_from_nexus
 echo "... done"
