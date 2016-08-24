@@ -1,6 +1,6 @@
 # Deployment of the application
 1) Overwrites the application secret. All the properties under ose-secrets are added to the secret.<br/>
-2) Application os deployed to OpenShift
+2) Application is deployed to OpenShift
 
 ## Run the deployment script
 git clone https://github.com/jpsmoura/Openshift-CI-CD.git &&

@@ -2,7 +2,7 @@ S2I_DESTINATION=${S2I_DESTINATION:-/tmp}
 S2I_SOURCE_DIR="${S2I_DESTINATION}/src"
 S2I_ARTIFACTS_DIR="${S2I_DESTINATION}/artifacts"
 DEPLOYMENTS_DIR=/deployments
-#########Environment Variables to be used by the CI/CD Process#############
+#########Default values for the variables used in the assemble script can be set here or passed as argument#############
 #REPOSITORY_NAME=nexus/content/repositories/releases
 #NEXUS_URL=http://172.17.11.179:8081/
 #GROUP_ID=/com/jpmoura/

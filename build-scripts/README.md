@@ -20,4 +20,4 @@ chmod +x build.sh &&
 
 ##This example
 We haven't created a Nexus instance for this example, as a replacement, Dropbox is being used to store a sample release bundle.<br/>
-In order to remove this hardcoded link please comment line 120 on the assemble script
+In order to remove this hardcoded link please comment line 120 on the assemble script.
