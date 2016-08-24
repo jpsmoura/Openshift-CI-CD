@@ -43,7 +43,7 @@ case $key in
     ;;
     *)
     echo -e $RED"Illegal parameters: -$OPTARG"$WHITE
-    echo -e $RED"Example: ./build.sh -u admin -p admin -o 10.1.2.2:8443 -n test4 -a s2i-quickstart-cdi-camel -x https://maven.repository.redhat.com/ga -g /apache-log4j/log4j/ -i app -v 1.2.14"$WHITE
+    echo -e $RED"Example: ./build.sh -u admin -p admin -o 10.1.2.2:8443 -n test4 -a s2i-quickstart-cdi-camel -x http://localhost:8081/nexus -g /apache-log4j/log4j/ -i app -v 1.2.14"$WHITE
     ;;
     esac
     shift # past argument or value
