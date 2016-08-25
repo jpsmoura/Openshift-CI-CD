@@ -15,15 +15,11 @@ case $key in
     USER_PASSWD="$2"
     shift # past argument
     ;;
-    -e|--environment)
-    ENV="$2"
-    shift # past argument
-    ;;
     -o|--osehost)
     OSE_SERVER="$2"
     shift # past argument
     ;;
-    -n|--namespace)
+    -e|--environment)
     APP_NAMESPACE="$2"
     shift # past argument
     ;;
@@ -37,7 +33,7 @@ case $key in
     ;;
     *)
     echo -e $RED"Illegal parameters: -$OPTARG"$WHITE
-    echo -e $RED"Example: ./deploy.sh -u admin -p admin -e DEV -o 10.1.2.2:8443 -n test4 -s my-secret -a s2i-quickstart-cdi-camel"$WHITE
+    echo -e $RED"Example: ./deploy.sh -u admin -p admin -e dev -o 10.1.2.2:8443 -s my-secret -a s2i-quickstart-cdi-camel"$WHITE
     ;;
 esac
 shift # past argument or value
@@ -51,4 +47,5 @@ update_secrets
 
 # App Deployment
 echo -e "Deploying Application: $APP_NAME"
-oc deploy $APP_NAME --latest
+#oc deploy $APP_NAME --latest
+oc tag $APP_NAME:latest $APP_NAME:dev

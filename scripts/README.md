@@ -5,7 +5,7 @@ In this example, we are triggering a custom Openshift s2i build. As part of the 
 git clone https://github.com/jpsmoura/Openshift-CI-CD.git &&
 cd Openshift-CI-CD/scripts/ &&
 chmod +x build.sh &&
-./build.sh -u admin -p admin -o 10.1.2.2:8443 -n test4 -a s2i-quickstart-cdi-camel -u http://localhost:8081/ -g /com/jpmoura/ -i app -v 1.0
+./build.sh -u admin -p admin -o 10.1.2.2:8443 -e dev -a s2i-quickstart-cdi-camel -x http://localhost:8081/ -g /com/jpmoura/ -i app -v 1.0
 
 #### Script Parameters
 -u or --user<br/>
@@ -20,8 +20,8 @@ chmod +x build.sh &&
 
 ### This example
 We haven't created a Nexus instance for this example, as a replacement, Dropbox is being used to store a sample release bundle.<br/>
-In order to remove this hardcoded link please comment line 120 on the assemble script.
-
+In order to remove this hardcoded link please comment line 120 on the assemble script.<br/>
+Todo my-secret needs to be mapped in the json file
 
 # Deployment of the application
 1) Overwrites the application secret. All the properties under ose-secrets are added to the secret.<br/>
@@ -31,12 +31,12 @@ In order to remove this hardcoded link please comment line 120 on the assemble s
 git clone https://github.com/jpsmoura/Openshift-CI-CD.git &&
 cd Openshift-CI-CD/scripts/ &&
 chmod +x deploy.sh &&
-./deploy.sh -u admin -p admin -e DEV -o 10.1.2.2:8443 -n test4 -s my-secret -a s2i-quickstart-cdi-camel
+./deploy.sh -u admin -p admin -o 10.1.2.2:8443 -e test -s my-secret -a s2i-quickstart-cdi-camel
 
 #### Script parameters
 -u or --user<br/>
 -p or --password<br/>
--e or --environment --> DEV,TEST,PROD<br/>
+-e or --environment --> dev,test,prod<br/>
 -o or --osehost<br/>
 -n or --namespace<br/>
 -s or --secret<br/>

@@ -16,15 +16,15 @@ case $key in
     shift # past argument
     ;;
     -e|--environment)
-    ENV="$2"
+    APP_NAMESPACE="$2"
+    shift # past argument
+    ;;
+    -t|--targetenv)
+    TARGET_ENV="$2"
     shift # past argument
     ;;
     -o|--osehost)
     OSE_SERVER="$2"
-    shift # past argument
-    ;;
-    -n|--namespace)
-    APP_NAMESPACE="$2"
     shift # past argument
     ;;
     -s|--secret)
@@ -37,7 +37,8 @@ case $key in
     ;;
     *)
     echo -e $RED"Illegal parameters: -$OPTARG"$WHITE
-    echo -e $RED"Example: ./deploy.sh -u admin -p admin -e DEV -o 10.1.2.2:8443 -n test4"$WHITE
+    echo -e $RED"Example: ./promotion.sh -u admin -p admin -e dev -t test -o 10.1.2.2:8443"$WHITE
+    echo -e $RED"Example: ./promotion.sh -u admin -p admin -e test -t prod -o 10.1.2.2:8443"$WHITE
     ;;
 esac
 shift # past argument or value
@@ -45,8 +46,8 @@ done
 
 openshift_login
 # Update secrets on target environment
-oc project $ENV
+oc project $TARGET_ENV
 update_secrets
-# Tags will always be from the dev namespace
+
 oc project dev
-oc tag $APP_NAME:latest $APP_NAME:$ENV
+oc tag $APP_NAME:$APP_NAMESPACE $APP_NAME:$TARGET_ENV

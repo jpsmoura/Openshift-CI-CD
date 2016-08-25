@@ -19,7 +19,7 @@ case $key in
     OSE_SERVER="$2"
     shift # past argument
     ;;
-    -n|--namespace)
+    -e|--environment)
     APP_NAMESPACE="$2"
     shift # past argument
     ;;
@@ -45,13 +45,15 @@ case $key in
     ;;
     *)
     echo -e $RED"Illegal parameters: -$OPTARG"$WHITE
-    echo -e $RED"Example: ./build.sh -u admin -p admin -o 10.1.2.2:8443 -n test4 -a s2i-quickstart-cdi-camel -x http://localhost:8081/nexus -g /apache-log4j/log4j/ -i app -v 1.2.14"$WHITE
+    echo -e $RED"Example: ./build.sh -u admin -p admin -o 10.1.2.2:8443 -e dev -a s2i-quickstart-cdi-camel -x http://localhost:8081/nexus -g /apache-log4j/log4j/ -i app -v 1.2.14"$WHITE
     ;;
     esac
     shift # past argument or value
     done
 
 openshift_login
+
+oc project $APP_NAMESPACE
 
 BUILD_ID=`oc start-build $APP_NAME -n $APP_NAMESPACE --env NEXUS_URL=$NEXUS_URL --env GROUP_ID=$MVN_GROUP_ID --env ARTIFACT_ID=$MVN_ARTIFACT_ID --env ARTIFACT_VERSION=$MVN_VERSION`
 
@@ -60,13 +62,13 @@ rc=1
 attempts=25
 count=0
 while [ $rc -ne 0 -a $count -lt $attempts ]; do
-  status=`oc get build ${BUILD_ID} -t '{{.status.phase}}'`
+  status=`oc get build ${BUILD_ID} --template '{{.status.phase}}'`
   if [[ $status == "Failed" || $status == "Error" || $status == "Canceled" ]]; then
     echo "Fail: Build completed with unsuccessful status: ${status}"
     exit 1
   fi
   if [ $status == "Complete" ]; then
-    echo "Build completed successfully, will test deployment next"
+    echo "Build completed successfully"
     rc=0
   fi
 
@@ -90,14 +92,14 @@ rc=1
 count=0
 attempts=100
 while [ $rc -ne 0 -a $count -lt $attempts ]; do
-  status=`oc get build ${BUILD_ID} -t '{{.status.phase}}'`
+  status=`oc get build ${BUILD_ID} --template '{{.status.phase}}'`
   if [[ $status == "Failed" || $status == "Error" || $status == "Canceled" ]]; then
     echo "Fail: Build completed with unsuccessful status: ${status}"
     exit 1
   fi
 
   if [ $status == "Complete" ]; then
-    echo "Build completed successfully, will test deployment next"
+    echo "Build completed successfully"
     rc=0
   else
     count=$(($count+1))
@@ -117,14 +119,14 @@ rc=1
 count=0
 attempts=100
 while [ $rc -ne 0 -a $count -lt $attempts ]; do
-  status=`oc get build ${BUILD_ID} -t '{{.status.phase}}'`
+  status=`oc get build ${BUILD_ID} --template '{{.status.phase}}'`
   if [[ $status == "Failed" || $status == "Error" || $status == "Canceled" ]]; then
     echo "Fail: Build completed with unsuccessful status: ${status}"
     exit 1
   fi
 
   if [ $status == "Complete" ]; then
-    echo "Build completed successfully, will test deployment next"
+    echo "Build completed successfully"
     rc=0
   else
     count=$(($count+1))

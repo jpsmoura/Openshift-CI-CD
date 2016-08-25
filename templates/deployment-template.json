@@ -17,9 +17,9 @@
       "description": "Application Name"
     },
     {
-      "name": "TAG_NAME",
+      "name": "ENV",
       "required": true,
-      "description": "Tag name to trigger deployment"
+      "description": "Environment name which corresponds to the tag name it will be listinening for changes"
     },
 
     {
@@ -137,7 +137,7 @@
               "from": {
                 "kind": "ImageStreamTag",
                 "namespace": "dev",
-                "name": "${APP_NAME}:${TAG_NAME}"
+                "name": "${APP_NAME}:${ENV}"
               }
             }
           }
@@ -169,7 +169,7 @@
             "containers": [
               {
                 "name": "${APP_NAME}",
-                "image": "dev/${APP_NAME}:${TAG_NAME}",
+                "image": "library/${APP_NAME}:${ENV}",
                 "readinessProbe": {
                   "exec": {
                     "command": [

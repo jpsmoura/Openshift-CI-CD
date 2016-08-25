@@ -39,12 +39,12 @@ function update_secrets()
 
   if ! [ $? -eq 0 ]; then
     echo -e "Creating new secret: $SECRET_NAME"
-    oc secrets new $SECRET_NAME ../environments/$ENV/ose-secrets
+    oc secrets new $SECRET_NAME ../environments/$APP_NAMESPACE/ose-secrets
   else
     echo -e "Deleting existing secret: $SECRET_NAME"
     oc delete secret $SECRET_NAME
     echo -e "Creating new secret: $SECRET_NAME"
-    oc secrets new $SECRET_NAME ../environments/$ENV/ose-secrets
+    oc secrets new $SECRET_NAME ../environments/$APP_NAMESPACE/ose-secrets
   fi
 }
 
