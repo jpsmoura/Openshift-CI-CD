@@ -1,3 +1,6 @@
+# Demo Script
+In the cicd_example.sh script, you will find a bash example that show you how to trigger the process end to end.
+
 # Build the application
 In this example, we are triggering a custom Openshift s2i build. As part of the docker image creation, we are fetching a release bundle from Nexus and adding it to the container. <br /> To accomplish this, the file under .s2i/bin/assemble has been updated to call the function get_from_nexus.
 
@@ -49,4 +52,4 @@ Simply copy one of the environments folders and rename it to the name of your ne
 To promote between environments we are using the image change trigger mechanism. Once the images are tagged the deployment process kicks off automatically.<br/>
 
 e.g. <br/>
-./promotion.sh -u admin -p admin -e prod -o 10.1.2.2:8443 -a s2i-quickstart-cdi-camel
+./promotion.sh -u admin -p admin -e dev -t test -o 10.1.2.2:8443 -a s2i-quickstart-cdi-camel -s my-secret

@@ -3,7 +3,7 @@ git clone https://github.com/jpsmoura/Openshift-CI-CD.git
 chmod -R +x *
 
 oc login -uadmin -padmin --server=10.1.2.2:8443
-# Create Projects through the web console , authorization issues need to be solved.
+# Create Projects through the web console , authorization issues need to be solved. (dev,test,prod)
 
 #oc create namespace dev
 #oc create namespace test
