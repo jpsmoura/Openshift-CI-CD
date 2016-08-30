@@ -21,6 +21,11 @@
       "required": true,
       "description": "Environment name which corresponds to the tag name it will be listinening for changes"
     },
+    {
+      "name": "SECRET_NAME",
+      "required": true,
+      "description": "Application Secret Name with all the properties"
+    },
 
     {
       "name": "GIT_REF",
@@ -166,6 +171,14 @@
             }
           },
           "spec": {
+            "volumes": [
+                {
+                    "name": "secret-volume",
+                    "secret": {
+                        "secretName": "${SECRET_NAME}"
+                    }
+                }
+            ],
             "containers": [
               {
                 "name": "${APP_NAME}",
@@ -188,7 +201,14 @@
                     "protocol": "TCP"
                   }
                 ],
-                "resources": {}
+                "resources": {},
+                "volumeMounts": [
+                    {
+                        "name": "secret-volume",
+                        "readOnly": false,
+                        "mountPath": "/etc/secret-volume"
+                    }
+                ]
               }
             ]
           }

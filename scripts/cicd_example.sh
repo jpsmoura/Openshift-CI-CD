@@ -16,9 +16,9 @@ oc login -uadmin -padmin --server=10.1.2.2:8443
 cd Openshift-CI-CD/templates
 
 oc process -f build-template.json -v GIT_REPO=https://github.com/jpsmoura/Openshift-CI-CD.git | oc create -n dev -f -
-oc process -f deployment-template.json -v ENV=dev | oc create -n dev -f -
-oc process -f deployment-template.json -v ENV=test | oc create -n test -f -
-oc process -f deployment-template.json -v ENV=prod | oc create -n prod -f -
+oc process -f deployment-template.json -v ENV=dev -v SECRET_NAME=my-secret | oc create -n dev -f -
+oc process -f deployment-template.json -v ENV=test -v SECRET_NAME=my-secret | oc create -n test -f -
+oc process -f deployment-template.json -v ENV=prod -v SECRET_NAME=my-secret | oc create -n prod -f -
 
 #Build and deploy to dev
 cd ../scripts/
