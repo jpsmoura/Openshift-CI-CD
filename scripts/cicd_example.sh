@@ -4,9 +4,14 @@ chmod -R +x *
 
 oc login -uadmin -padmin --server=10.1.2.2:8443
 # Create Projects through the web console , authorization issues need to be solved.
+
 #oc create namespace dev
 #oc create namespace test
 #oc create namespace prod
+
+#oc policy add-role-to-user admin admin -n dev
+#oc policy add-role-to-user admin admin -n test
+#oc policy add-role-to-user admin admin -n prod
 
 cd Openshift-CI-CD/templates
 
