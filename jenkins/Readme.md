@@ -1,4 +1,4 @@
-# This page describes the ephemeral Jenkins Job which is responsible for the following:
+# This page describes the openshift ephemeral build which is triggered by a Jenkins job:
 
 1. Login to the Openshift webconsole using the admin user credentials.
 2. Create a namespace/project
