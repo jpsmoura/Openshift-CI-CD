@@ -4,8 +4,9 @@
 2. Create a namespace/project
 3. Create a service account and grant edit privileges to the namespace created in step 2
 4. Retrieve the OSE Authentication Token of the service account created in step 3
-5. Start an Openshift build through the pipeline plugin step using the token 
-6. Delete the namespace/project and logout
+5. Create a sample Secret using the Plugin
+6. Start an Openshift build through the pipeline plugin step using the token 
+7. Delete the namespace/project and logout
 
 ## Notes:
 
