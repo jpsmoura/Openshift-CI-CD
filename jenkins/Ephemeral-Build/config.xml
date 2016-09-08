@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <io.fabric8.jenkins.openshiftsync.BuildConfigProjectProperty plugin="openshift-sync@0.0.12">
+      <uid></uid>
+      <namespace></namespace>
+      <name></name>
+      <resourceVersion></resourceVersion>
+      <contextDir></contextDir>
+    </io.fabric8.jenkins.openshiftsync.BuildConfigProjectProperty>
+    <hudson.model.ParametersDefinitionProperty>
+      <parameterDefinitions>
+        <hudson.model.StringParameterDefinition>
+          <name>PROJECT_NAME</name>
+          <description></description>
+          <defaultValue>jenkins-project</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>GIT_CICD_URL</name>
+          <description></description>
+          <defaultValue>https://github.com/jpsmoura/Openshift-CI-CD</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>GIT_APP_URL</name>
+          <description></description>
+          <defaultValue>https://github.com/jpsmoura/Openshift-CI-CD</defaultValue>
+        </hudson.model.StringParameterDefinition>
+        <hudson.model.StringParameterDefinition>
+          <name>TEMPLATE_FILENAME</name>
+          <description></description>
+          <defaultValue>build-template.json</defaultValue>
+        </hudson.model.StringParameterDefinition>
+      </parameterDefinitions>
+    </hudson.model.ParametersDefinitionProperty>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.6.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>${GIT_CICD_URL}</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/v2</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <EnvInjectBuilder plugin="envinject@1.92.1">
+      <info>
+        <propertiesContent>PATH=/usr/local/bin/:$PATH
+SKIP_TLS=true</propertiesContent>
+      </info>
+    </EnvInjectBuilder>
+    <hudson.tasks.Shell>
+      <command>chmod -R +x ./scripts/*
+./scripts/create-project.sh</command>
+    </hudson.tasks.Shell>
+    <EnvInjectBuilder plugin="envinject@1.92.1">
+      <info>
+        <propertiesFilePath>env_start.txt</propertiesFilePath>
+      </info>
+    </EnvInjectBuilder>
+    <com.openshift.jenkins.plugins.pipeline.OpenShiftBuilder plugin="openshift-pipeline@1.0.22">
+      <apiURL>https://10.1.2.2:8443</apiURL>
+      <namespace>${PROJECT_NAME}</namespace>
+      <authToken>${OSE_TOKEN}</authToken>
+      <verbose>false</verbose>
+      <bldCfg>s2i-quickstart-cdi-camel</bldCfg>
+      <commitID></commitID>
+      <buildName></buildName>
+      <showBuildLogs>true</showBuildLogs>
+      <checkForTriggeredDeployments>false</checkForTriggeredDeployments>
+      <waitTime></waitTime>
+    </com.openshift.jenkins.plugins.pipeline.OpenShiftBuilder>
+    <com.openshift.jenkins.plugins.pipeline.OpenShiftCreator plugin="openshift-pipeline@1.0.22">
+      <apiURL>https://10.1.2.2:8443</apiURL>
+      <namespace>${PROJECT_NAME}</namespace>
+      <authToken>${OSE_TOKEN}</authToken>
+      <verbose>true</verbose>
+      <jsonyaml>{
+  &quot;apiVersion&quot;: &quot;v1&quot;,
+  &quot;kind&quot;: &quot;Secret&quot;,
+  &quot;metadata&quot;: {
+    &quot;name&quot;: &quot;mysecret&quot;
+  },
+  &quot;namespace&quot;: &quot;${PROJECT_NAME}&quot;,
+  &quot;data&quot;: { 
+    &quot;username&quot;: &quot;dmFsdWUtMQ0K&quot;,
+    &quot;password&quot;: &quot;dmFsdWUtMg0KDQo=&quot;
+    }
+}</jsonyaml>
+    </com.openshift.jenkins.plugins.pipeline.OpenShiftCreator>
+    <hudson.tasks.Shell>
+      <command>./scripts/clear-project.sh</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers>
+    <com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+      <varPasswordPairs>
+        <varPasswordPair var="ADMIN_PWD" password="bWCHt+gJdTlcc/0eaog45GIHFTKjp/IsQgfbZqAazNQ="/>
+      </varPasswordPairs>
+    </com.michelin.cio.hudson.plugins.maskpasswords.MaskPasswordsBuildWrapper>
+  </buildWrappers>
+</project>
